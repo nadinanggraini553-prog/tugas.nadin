@@ -1,0 +1,408 @@
+<?php
+
+// ==========================================
+// CLASS INDUK: GADGET
+// ==========================================
+class Gadget {
+    protected $merek;
+    protected $model;
+    protected $harga;
+
+    public function __construct($merek, $model, $harga) {
+        $this->merek = $merek;
+        $this->model = $model;
+        $this->harga = $harga;
+    }
+
+    public function getMerek() {
+        return $this->merek;
+    }
+
+    public function getModel() {
+        return $this->model;
+    }
+
+    public function getHarga() {
+        return $this->harga;
+    }
+
+    public function tampilkanInfo() {
+        return "Merek: " . $this->merek .
+               " | Model: " . $this->model .
+               " | Harga: Rp " . number_format($this->harga, 0, ',', '.');
+    }
+}
+
+// ==========================================
+// CLASS ANAK 1: SMARTPHONE
+// ==========================================
+class Smartphone extends Gadget {
+    private $kapasitas;
+    private $kamera;
+
+    public function __construct($merek, $model, $harga, $kapasitas, $kamera) {
+        parent::__construct($merek, $model, $harga);
+        $this->kapasitas = $kapasitas;
+        $this->kamera = $kamera;
+    }
+
+    public function getKapasitas() {
+        return $this->kapasitas;
+    }
+
+    public function getKamera() {
+        return $this->kamera;
+    }
+}
+
+// ==========================================
+// CLASS ANAK 2: LAPTOP
+// ==========================================
+class Laptop extends Gadget {
+    private $processor;
+    private $ram;
+
+    public function __construct($merek, $model, $harga, $processor, $ram) {
+        parent::__construct($merek, $model, $harga);
+        $this->processor = $processor;
+        $this->ram = $ram;
+    }
+
+    public function getProcessor() {
+        return $this->processor;
+    }
+
+    public function getRam() {
+        return $this->ram;
+    }
+}
+
+// ==========================================
+// MEMBUAT OBJECT GADGET
+// ==========================================
+$smartphone1 = new Smartphone(
+    "Samsung",
+    "Galaxy S24 Ultra",
+    18000000,
+    "256 GB",
+    "200 MP"
+);
+
+$smartphone2 = new Smartphone(
+    "Apple",
+    "iPhone 16",
+    15000000,
+    "128 GB",
+    "48 MP"
+);
+
+$laptop1 = new Laptop(
+    "ASUS",
+    "ROG Zephyrus",
+    22000000,
+    "Intel Core i7",
+    "16 GB"
+);
+
+$laptop2 = new Laptop(
+    "Lenovo",
+    "IdeaPad Slim 3",
+    8500000,
+    "AMD Ryzen 5",
+    "8 GB"
+);
+
+$daftarSmartphone = [$smartphone1, $smartphone2];
+$daftarLaptop = [$laptop1, $laptop2];
+
+?>
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Gadget Store</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background: #f1f5f9;
+    color: #1e293b;
+}
+
+.navbar {
+    background: #0f172a;
+    color: white;
+    padding: 20px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #38bdf8;
+}
+
+.navbar p {
+    color: #cbd5e1;
+    font-size: 14px;
+}
+
+.hero {
+    padding: 65px 8%;
+    background: linear-gradient(120deg, #0f172a, #1d4ed8);
+    color: white;
+}
+
+.hero h1 {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    color: #dbeafe;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+.container {
+    max-width: 1150px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.section-title {
+    margin-bottom: 25px;
+}
+
+.section-title h2 {
+    font-size: 26px;
+    margin-bottom: 8px;
+}
+
+.section-title p {
+    color: #64748b;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+    margin-bottom: 45px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0 5px 20px #0000000d;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px #00000012;
+}
+
+.icon {
+    width: 55px;
+    height: 55px;
+    background: #dbeafe;
+    color: #2563eb;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 27px;
+    margin-bottom: 18px;
+}
+
+.category {
+    color: #2563eb;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.card h3 {
+    font-size: 21px;
+    margin: 8px 0;
+}
+
+.detail {
+    color: #64748b;
+    font-size: 14px;
+    line-height: 2;
+    margin: 12px 0;
+}
+
+.price {
+    font-size: 22px;
+    font-weight: bold;
+    color: #2563eb;
+    margin-top: 15px;
+}
+
+.info-box {
+    background: #0f172a;
+    color: white;
+    padding: 30px;
+    border-radius: 18px;
+    margin-bottom: 40px;
+}
+
+.info-box h2 {
+    margin-bottom: 12px;
+}
+
+.info-box p {
+    color: #cbd5e1;
+    line-height: 1.8;
+}
+
+.footer {
+    background: #0f172a;
+    color: #94a3b8;
+    padding: 25px;
+    text-align: center;
+}
+
+@media(max-width: 700px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+        font-size: 30px;
+    }
+
+    .navbar {
+        padding: 18px 5%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="logo">GADGET<span>STORE.</span></div>
+    <p>Technology & Innovation</p>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+    <h1>Explore The Latest Gadget</h1>
+    <p>
+        Temukan berbagai pilihan smartphone dan laptop
+        dengan teknologi terbaru untuk kebutuhan Anda.
+    </p>
+</div>
+
+<div class="container">
+
+    <!-- SMARTPHONE -->
+    <div class="section-title">
+        <h2>Smartphone Collection</h2>
+        <p>Pilihan smartphone terbaik untuk Anda.</p>
+    </div>
+
+    <div class="grid">
+
+        <?php foreach ($daftarSmartphone as $hp): ?>
+
+        <div class="card">
+            <div class="icon">📱</div>
+
+            <span class="category">Smartphone</span>
+
+            <h3>
+                <?= htmlspecialchars($hp->getMerek()); ?>
+                <?= htmlspecialchars($hp->getModel()); ?>
+            </h3>
+
+            <div class="detail">
+                Penyimpanan: <?= htmlspecialchars($hp->getKapasitas()); ?>
+                <br>
+                Kamera: <?= htmlspecialchars($hp->getKamera()); ?>
+            </div>
+
+            <div class="price">
+                Rp <?= number_format($hp->getHarga(), 0, ',', '.'); ?>
+            </div>
+        </div>
+
+        <?php endforeach; ?>
+
+    </div>
+
+    <!-- LAPTOP -->
+    <div class="section-title">
+        <h2>Laptop Collection</h2>
+        <p>Performa terbaik untuk produktivitas dan hiburan.</p>
+    </div>
+
+    <div class="grid">
+
+        <?php foreach ($daftarLaptop as $laptop): ?>
+
+        <div class="card">
+            <div class="icon">💻</div>
+
+            <span class="category">Laptop</span>
+
+            <h3>
+                <?= htmlspecialchars($laptop->getMerek()); ?>
+                <?= htmlspecialchars($laptop->getModel()); ?>
+            </h3>
+
+            <div class="detail">
+                Processor: <?= htmlspecialchars($laptop->getProcessor()); ?>
+                <br>
+                RAM: <?= htmlspecialchars($laptop->getRam()); ?>
+            </div>
+
+            <div class="price">
+                Rp <?= number_format($laptop->getHarga(), 0, ',', '.'); ?>
+            </div>
+        </div>
+
+        <?php endforeach; ?>
+
+    </div>
+
+    <!-- PENJELASAN -->
+    <div class="info-box">
+        <h2>About Gadget Store</h2>
+        <p>
+            Website ini dibuat menggunakan konsep Object Oriented
+            Programming (OOP) PHP dengan metode Inheritance.
+            Class Gadget merupakan class induk, sedangkan Smartphone
+            dan Laptop merupakan class anak yang mewarisi properti
+            dan method dari class Gadget.
+        </p>
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    ©️ 2026 Gadget Store | PHP OOP Inheritance
+</div>
+
+</body>
+</html>
